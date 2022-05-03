@@ -99,7 +99,18 @@ class exercisesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $curso = Curso::find($id);
+        //retornamos la url pubica de la imagen
+        $urlImagenBD = $curso->imagen;
+        //remplazamos en dicha url la palabra public por la palabra storage ya que necesitamos la ruta absoluta
+        $nombreImagen = str_replace('public/','\storage\\',$urlImagenBD);
+        //le anexamos mediante la funcion public_path la ruta de la carpeta storage/app/public/cursos a la ruta de la imagen
+        $rutaCompleta = public_path().$nombreImagen;
+        //La funcion unlink elimina el archivo contenido en la ruta especificada
+        unlink($rutaCompleta);
+        //Por ultimo eliminamos el registro completo en la base de datos
+        $curso->delete();
+        return 'Eliminado';
     }
 
 

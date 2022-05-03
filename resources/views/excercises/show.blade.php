@@ -11,6 +11,13 @@
                     <h5 class="card-title">{{$curso->nombre}}</h5>
                     <p class="card-text">{{$curso->descripcion}}</p>
                     <a href="/cursos/{{$curso->id}}/edit" class="btn btn-primary btn-dark">Editar</a>
+                    <br>
+                    <br>
+                    <form action="/cursos/{{$curso->id}}" class="form-group" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger" type="submit">Eliminar</button>
+                    </form>
                 </div>
             </div>
         </div>
